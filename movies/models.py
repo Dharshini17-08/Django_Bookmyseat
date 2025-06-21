@@ -11,15 +11,16 @@ class Movie(models.Model):
 
     def __str__(self):
         return self.name
-
+"""
 class Theater(models.Model):
     name = models.CharField(max_length=255)
     movie = models.ForeignKey(Movie,on_delete=models.CASCADE,related_name='theaters')
     time= models.DateTimeField()
 
     def __str__(self):
-        return f'{self.name} - {self.movie.name} at {self.time}'  
+        return f'{self.name} - {self.movie.name} at {self.time}'
 """
+
 # in movie/models.py
 
 class Theater(models.Model):
@@ -35,7 +36,7 @@ class Theater(models.Model):
 
     def is_fully_booked(self):
         return self.seats_available_count() == 0
-"""
+
 
 class Seat(models.Model):
     theater = models.ForeignKey(Theater,on_delete=models.CASCADE,related_name='seats')

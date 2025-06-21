@@ -157,12 +157,22 @@
   
         <div class="show-times">
           <div class="time-box">
-            {{ theater.time }}
-            <a href="{% url 'book_seats' theater.id %}">
-              <span>Book Now</span>
-            </a>
+            {{ theater.time|date:"M d, Y H:i" }}<br>
+
+            {% if theater.is_fully_booked %}
+              <span style="color: red; font-size: 12px;">Fully Booked</span>
+            {% else %}
+              <span style="color: green; font-size: 12px;">
+                Seats Available ({{ theater.seats_available_count }})
+              </span>
+              <br>
+              <a href="{% url 'book_seats' theater.id %}">
+                <span style="color: #000;">Book Now</span>
+              </a>
+            {% endif %}
           </div>
         </div>
+
         {% endfor %}
       {% else %}
         <!-- Message when no theaters are available -->

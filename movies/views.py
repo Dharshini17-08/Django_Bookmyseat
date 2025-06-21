@@ -11,11 +11,13 @@ def movie_list(request):
         movies=Movie.objects.all()
     return render(request,'movies/movie_list.html',{'movies':movies})
 
+"""
+
 def theater_list(request,movie_id):
     movie = get_object_or_404(Movie,id=movie_id)
     theater=Theater.objects.filter(movie=movie)
     return render(request,'movies/theater_list.html',{'movie':movie,'theaters':theater}) 
-""""
+"""
 
 # in movie/views.py
 
@@ -29,7 +31,7 @@ def theater_list(request, movie_id):
         'theaters': theaters
     })
 
-"""
+
 @login_required(login_url='/login/')
 def book_seats(request,theater_id):
     theaters=get_object_or_404(Theater,id=theater_id)
