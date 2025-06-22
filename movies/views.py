@@ -35,7 +35,11 @@ def theater_list(request, movie_id):
 @login_required(login_url='/login/')
 def book_seats(request,theater_id):
     theaters=get_object_or_404(Theater,id=theater_id)
-    seats=Seat.objects.filter(theater=theaters)
+    #seats=Seat.objects.filter(theater=theaters)
+    
+    seats = Seat.objects.filter(theater=theaters).order_by('seat_number')
+
+
     if request.method=='POST':
         selected_Seats= request.POST.getlist('seats')
         error_seats=[]
