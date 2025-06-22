@@ -144,7 +144,17 @@
     font-size: 20px;
     margin: 0 10px;
   }
+  .seat.sold label {
+  pointer-events: none;
+}
+.seat label {
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 </style>
+
 <!-- <h1>Seats for {{theater.name}} - {{theater.movie.name}}</h1>
 {% if error %}
 <p style="color:red;">{{error}}</p>
@@ -167,6 +177,7 @@
       <button type="submit">Book selected seats</button>
 </form> -->
 
+<!--
 <script>
   document.querySelectorAll('input[type="checkbox"][name="seats"]').forEach(function (checkbox) {
     checkbox.addEventListener('change', function () {
@@ -176,6 +187,22 @@
       } else {
         parent.classList.remove('selected');
       }
+    });
+  });
+</script>
+-->
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll('input[type="checkbox"][name="seats"]').forEach(function (checkbox) {
+      checkbox.addEventListener('change', function () {
+        const parent = this.closest('.seat');
+        if (this.checked) {
+          parent.classList.add('selected');
+        } else {
+          parent.classList.remove('selected');
+        }
+      });
     });
   });
 </script>
