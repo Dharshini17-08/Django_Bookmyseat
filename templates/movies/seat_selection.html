@@ -1,32 +1,21 @@
-{% extends "users/basic.html" %} {% block content %}
+{% extends "users/basic.html" %}
+{% block content %}
 <div class="container mt-5">
   <div class="row">
     <div class="col-lg-8 mx-auto">
       <!-- Movie and Theater Info -->
       <div class="card mb-4">
         <div class="card-body">
-          <div
-            class="d-flex justify-content-between align-items-center flex-wrap"
-          >
+          <div class="d-flex justify-content-between align-items-center flex-wrap">
             <div>
               <h4 class="card-title">{{ theaters.movie.name }}</h4>
-              <p class="card-text text-muted">
-                {{ theaters.name }} | {{ theaters.time }}
-              </p>
+              <p class="card-text text-muted">{{ theaters.name }} | {{ theaters.time }}</p>
             </div>
             <div class="mt-2 mt-sm-0">
-              <button class="btn btn-outline-primary me-2 mb-2 mb-sm-0">
-                2D
-              </button>
-              <button class="btn btn-outline-primary me-2 mb-2 mb-sm-0">
-                3D
-              </button>
-              <button class="btn btn-outline-primary mb-2 mb-sm-0">
-                IMAX 3D
-              </button>
-              <button class="btn btn-outline-primary mb-2 mb-sm-0">
-                {{seats|length}} Tickets
-              </button>
+              <button class="btn btn-outline-primary me-2 mb-2 mb-sm-0">2D</button>
+              <button class="btn btn-outline-primary me-2 mb-2 mb-sm-0">3D</button>
+              <button class="btn btn-outline-primary mb-2 mb-sm-0">IMAX 3D</button>
+              <button class="btn btn-outline-primary mb-2 mb-sm-0">{{ seats|length }} Tickets</button>
             </div>
           </div>
         </div>
@@ -48,15 +37,16 @@
                   type="checkbox"
                   name="seats"
                   value="{{ seat.id }}"
-                  class="d-none"
+                  class="visually-hidden"
                   id="seat-{{ seat.id }}"
                 />
                 <label
                   for="seat-{{ seat.id }}"
                   class="w-100 h-100 d-flex align-items-center justify-content-center"
-                  >{{ seat.seat_number }}</label
-                >
-                {% else %} {{ seat.seat_number }} {% endif %}
+                >{{ seat.seat_number }}</label>
+                {% else %}
+                {{ seat.seat_number }}
+                {% endif %}
               </div>
               {% endfor %}
             </div>
@@ -89,6 +79,8 @@
     </div>
   </div>
 </div>
+
+<!-- Styles -->
 <style>
   body {
     font-family: Arial, sans-serif;
@@ -124,74 +116,25 @@
     line-height: 50px;
     color: #666;
   }
-  .footer {
-    background-color: #333;
-    color: #ccc;
-    padding: 20px 0;
-  }
-  .footer a {
-    color: #ccc;
-    text-decoration: none;
-  }
-  .footer a:hover {
-    text-decoration: underline;
-  }
-  .footer .col-md-2,
-  .footer .col-md-3 {
-    margin-bottom: 20px;
-  }
-  .footer .social-icons i {
-    font-size: 20px;
-    margin: 0 10px;
-  }
   .seat.sold label {
-  pointer-events: none;
-}
-.seat label {
-  cursor: pointer;
-  display: block;
-  width: 100%;
-  height: 100%;
-}
+    pointer-events: none;
+  }
+  .seat label {
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .visually-hidden {
+    opacity: 0;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    pointer-events: none;
+  }
 </style>
 
-<!-- <h1>Seats for {{theater.name}} - {{theater.movie.name}}</h1>
-{% if error %}
-<p style="color:red;">{{error}}</p>
-{% endif %}
-<form method="POST">
-    {% csrf_token %}
-    <ul>
-        {% for seat in seats %}
-        <li>
-          Seats{{seat.seat_number}}:
-          {% if seat.is_booked %}
-          <strong>Booked seat {{seat.seat_number}}</strong>
-          {% else %}
-          <input type="checkbox" name="seats" value="{{seat.id}}">
-          <strong>Available seat {{seat.seat_number}}</strong>
-          {% endif%}
-        </li>
-        {% endfor %}
-      </ul>
-      <button type="submit">Book selected seats</button>
-</form> -->
-
-<!--
-<script>
-  document.querySelectorAll('input[type="checkbox"][name="seats"]').forEach(function (checkbox) {
-    checkbox.addEventListener('change', function () {
-      const parent = this.closest('.seat');
-      if (this.checked) {
-        parent.classList.add('selected');
-      } else {
-        parent.classList.remove('selected');
-      }
-    });
-  });
-</script>
--->
-
+<!-- JS to toggle selected class -->
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll('input[type="checkbox"][name="seats"]').forEach(function (checkbox) {
